@@ -1,105 +1,65 @@
 <img src="https://svgshare.com/i/6W0.svg" alt="" data-canonical-src="https://svgshare.com/i/6W0.svg" width="200" />
 
-# HouseOps (Alpha)
-#### HouseOps is a unique Desktop ClickHouse Ops UI / IDE for OSX, Linux and Windows
+[![Build Status](https://travis-ci.org/HouseOps/HouseOps.svg?branch=master)](https://travis-ci.org/HouseOps/HouseOps) [![codebeat badge](https://codebeat.co/badges/fca4df8a-c0dc-4de2-a3b2-8393d52d987f)](https://codebeat.co/projects/github-com-houseops-houseops-master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6bd94b9273794b70857ea059e4cc2038)](https://www.codacy.com/app/jonatasfreitasv/HouseOps?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=HouseOps/HouseOps&amp;utm_campaign=Badge_Grade) [![With Electron](https://img.shields.io/badge/with-electron-blue.svg)](https://electronjs.org/) [![With React](https://img.shields.io/badge/with-react-blue.svg)](https://reactjs.org/)
+# HouseOps - Beta
+#### Do science and monitoring your ClickHouse database cluster!
 
-Download [here for linux](https://github.com/HouseOps/HouseOps/releases/download/0.0.2-alpha/HouseOps_0.0.2_amd64.deb) and [here for windows](https://github.com/HouseOps/HouseOps/releases/download/0.0.2-alpha.1/HouseOps.Setup.0.0.2.exe) last alpha version.
+HouseOps is an enterprise ClickHouse Ops UI for you run querys, monitoring ClickHouse health and make a lot of others thinks.
+<br/><br/>
+#### Contribute
+To-do list https://github.com/HouseOps/HouseOps/projects/5
 
-### Features:
-- Query builder;
-- Database manangement (soon);
-- Users manangement (soon);
-- Real-Time Data Analytics (soon);
-- Cluster/Infra monitoring (soon);
-- Cluster manangement (soon);
-- Kafka and Replicated tables monitoring (soon);
+Issues https://github.com/HouseOps/HouseOps/issues
 
-And a lot of others features (soon) for you take a beautiful implementation of ClickHouse S2.
+<br/><br/>
+### Download now
+[Linux](http://bit.ly/2sX6zrw) | [OSX](http://bit.ly/2Jyf2bR) | [Windows](http://bit.ly/2JJQPTf)
+
+version number is reseted, if you have 1.x.x version, uninstall latest before update
+<br/><br/>
+
+![preview](https://image.ibb.co/hPjCiJ/ezgif_com_gif_maker_1.gif)
+
+<br /><br />
+
+## About ClickHouse
+*Yandex ClickHouse* is an open source peta-byte scale, column-oriented OLAP distributed database, capable of real time generation of analytical data reports using SQL queries, see more informations in https://clickhouse.yandex/. HouseOps is an third-party tool.
+
+This project is listed in ClickHouse Official Documentation (https://clickhouse.yandex/docs/en/interfaces/third-party_gui).
+
+<br /><br />
+
+HousOps is based on [Electron](http://electron.atom.io/), [React](https://facebook.github.io/react/) and [Blueprint UI Toolkit](http://blueprintjs.com) for rapid application development.
+
+<br /><br />
+
+# How to start collaboration
+Hi! If this project is helping you, help him too, HouseOps wants to be the best tool for ClickHouse.
 
 
-
-*Yandex ClickHouse* is an open source column-oriented database management system capable of real time generation of analytical data reports using SQL queries, see more informations in https://clickhouse.yandex/.
-
-
-
-HousOps is based on [Electron](http://electron.atom.io/), [React](https://facebook.github.io/react/), [Redux](https://github.com/reactjs/redux), [React Router](https://github.com/reactjs/react-router), [Webpack](http://webpack.github.io/docs/), [React Transform HMR](https://github.com/gaearon/react-transform-hmr) and [Ant Design](https://ant.design/) for rapid application development.
-
-[![React](/internals/img/react-padded-90.png)](https://facebook.github.io/react/)
-[![Webpack](/internals/img/webpack-padded-90.png)](https://webpack.github.io/)
-[![Redux](/internals/img/redux-padded-90.png)](http://redux.js.org/)
-[![React Router](/internals/img/react-router-padded-90.png)](https://github.com/ReactTraining/react-router)
-[![Flow](/internals/img/flow-padded-90.png)](https://flowtype.org/)
-[![ESLint](/internals/img/eslint-padded-90.png)](http://eslint.org/)
-[![Jest](/internals/img/jest-padded-90.png)](https://facebook.github.io/jest/)
-[![Yarn](/internals/img/yarn-padded-90.png)](https://yarnpkg.com/)
-<img src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" alt="" data-canonical-src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" width="90" />
-____
-
-### Colaborate, please!
-This project need UX/UI/Designers and React specialist.
-See https://github.com/HouseOps/HouseOps/projects or/and open issue or/and send e-mail to jonatasfreitasv@gmail.com.
-____
-
-## Preview:
-![alt text](https://image.ibb.co/jGvQJc/Screenshot_from_2018_04_26_03_39_58.png)
-
-____
-
-##### My motivation, message sent to Yandex team (https://github.com/yandex/ClickHouse/issues/2218):
+## If you need, easy start a new ClickHouse test server with Docker
 ```
-Hello Yandex friends,
-
-after several tests on ClickHouse, I felt the power of this tool.
-
-I would like to thank the wonderful work done by the Yandex team.
-
-We are already using the company where I work, Zenvia, and is bringing us great solutions for data analysis.
-
-However we are having some difficulties in making it available for "non-technical" users to do querys, monitor features and everything else. For the tools of interaction with ClickHouse are very bad and full of bug (like Tabix).
-
-ClickHouse has to have a tool similar to that of MemSQL for example, I'm sure it will greatly increase the use of ClickHouse throughout the community.
-
-Thinking about that, I decided to start a project to make it possible, it's right at the beginning, but I have good visions of how it should be.
-
-This is the initial repository -> https://github.com/jonatasfreitasv/HouseOps
-The name I'm still thinking, if you have suggestions hehe :).
-
-My vision with some features -> https://github.com/jonatasfreitasv/HouseOps/projects
-
-I want to do something really relevant, to be proud of Yandex and your team.
-
-If anyone wants to contribute to the project, I will be very grateful (jonatasfreitasv@gmail.com).
-
-I need UX / UI and React professionals.
-
-If you can publish this work so that I can get more contributors, I would appreciate it.
-
-Thank you again, and go to work hard!!!
+docker run -it --rm -p 8123:8123 --name clickhouse-server-house-ops yandex/clickhouse-server
 ```
 
-____
 
-# Instructions for start development
-This project use https://github.com/chentsulin/electron-react-boilerplate.
-
-## Install
+## Clone this repo and install dependencies
 
 * **Note: requires a node version >= 7 and an npm version >= 4.**
-* **If you have installation or compilation issues with this project, please see [our debugging guide](https://github.com/chentsulin/electron-react-boilerplate/issues/400)**
 
 First, clone the repo via git:
 
 ```bash
-git clone --depth=1 https://github.com/chentsulin/electron-react-boilerplate.git your-project-name
+git clone https://github.com/HouseOps/HouseOps.git
 ```
 
-And then install dependencies with yarn.
+And then install dependencies with NPM.
 
 ```bash
-$ cd your-project-name
-$ yarn
+$ cd HouseOps
+$ npm install
 ```
-**Note**: If you can't use [yarn](https://github.com/yarnpkg/yarn), run `npm install`.
+
 
 ## Run
 
@@ -115,6 +75,7 @@ Alternatively, you can run the renderer and main processes separately. This way,
 $ npm run start-renderer-dev
 $ npm run start-main-dev
 ```
+
 
 ## Packaging
 
@@ -150,3 +111,5 @@ $ npm run test-e2e
 ```bash
 DEBUG_PROD=true npm run package
 ```
+
+This project use https://github.com/chentsulin/electron-react-boilerplate.

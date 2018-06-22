@@ -10,23 +10,101 @@
  *
  * @flow
  */
-import { app, BrowserWindow } from 'electron';
-import MenuBuilder from './menu';
+import sendToElastic from './utils/external-logging';
+
+process.on('uncaughtException', (err) => {
+  try {
+    sendToElastic({
+      message: err.message,
+      stack: err.stack
+    });
+  } catch (e) {
+    sendToElastic({
+      message: e.message,
+      stack: e.stack
+    });
+  }
+});
+
+process.on('unhandledRejection', (err) => {
+  try {
+    sendToElastic({
+      message: err.message,
+      stack: err.stack
+    });
+  } catch (e) {
+    sendToElastic({
+      message: e.message,
+      stack: e.stack
+    });
+  }
+});
+
+import { app, BrowserWindow, clipboard, shell } from 'electron'; //eslint-disable-line
+
+const { trackEvent, screenView } = require('./utils/google-analytics');
 
 let mainWindow = null;
+let loadingWindow = null;
+
+const defaultWindowConfig = {
+  darkTheme: true,
+  center: true,
+  show: false,
+  width: 1024,
+  height: 768,
+  backgroundColor: '#10161a'
+};
 
 if (process.env.NODE_ENV === 'production') {
+  trackEvent('Application Interaction', 'Application Started');
+
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
 }
 
-if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
-  require('electron-debug')();
-  const path = require('path');
-  const p = path.join(__dirname, '..', 'app', 'node_modules');
-  require('module').globalPaths.push(p);
-}
+/**
+ * Globals
+ */
+global.trackEvent = trackEvent;
+global.screenView = screenView;
 
+global.reload = () => {
+  loadingWindow = null;
+  buildLoadingWindow();
+
+  mainWindow.close();
+  mainWindow = null;
+
+  buildMainWindow();
+};
+
+global.openUrl = (url) => {
+  shell.openExternal(url);
+};
+
+global.copyToClipboard = (data) => {
+  clipboard.writeText(data);
+};
+
+global.exit = () => {
+  process.exit(0);
+};
+
+/**
+ * Add event listeners...
+ */
+app.on('window-all-closed', () => {
+  // Respect the OSX convention of having the application in memory even
+  // after all windows have been closed
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
+
+/**
+ * DevTools
+ */
 const installExtensions = async () => {
   const installer = require('electron-devtools-installer');
   const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
@@ -40,47 +118,56 @@ const installExtensions = async () => {
     .catch(console.log);
 };
 
-
 /**
- * Add event listeners...
+ * Windows
  */
+const buildLoadingWindow = () => {
+  loadingWindow = new BrowserWindow(defaultWindowConfig);
 
-app.on('window-all-closed', () => {
-  // Respect the OSX convention of having the application in memory even
-  // after all windows have been closed
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
+  loadingWindow.loadURL(`file://${__dirname}/loading.html`);
 
-
-app.on('ready', async () => {
-  if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
-    await installExtensions();
-  }
-
-  mainWindow = new BrowserWindow({
-    show: false,
-    width: 1024,
-    height: 728
+  loadingWindow.on('closed', () => {
+    loadingWindow = null;
   });
+
+  loadingWindow.webContents.on('did-finish-load', () => {
+    loadingWindow.show();
+    loadingWindow.maximize();
+    loadingWindow.focus();
+    loadingWindow.setMenuBarVisibility(false);
+  });
+};
+
+const buildMainWindow = () => {
+  mainWindow = new BrowserWindow(defaultWindowConfig);
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
-  // @TODO: Use 'ready-to-show' event
-  //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
   mainWindow.webContents.on('did-finish-load', () => {
-    if (!mainWindow) {
-      throw new Error('"mainWindow" is not defined');
-    }
-    mainWindow.show();
-    mainWindow.focus();
+    setTimeout(() => {
+      if (loadingWindow) {
+        loadingWindow.close();
+      }
+
+      mainWindow.maximize();
+      mainWindow.show();
+      mainWindow.focus();
+      mainWindow.setMenuBarVisibility(false);
+    }, 1000);
   });
 
   mainWindow.on('closed', () => {
-    mainWindow = null;
+    // TODO: This step fire BUG when reload is fired, check before.
+    // mainWindow = null;
   });
+};
 
-  const menuBuilder = new MenuBuilder(mainWindow);
-  menuBuilder.buildMenu();
+/**
+ * Start
+ */
+app.on('ready', async () => {
+  await installExtensions();
+
+  buildLoadingWindow();
+  buildMainWindow();
 });

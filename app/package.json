@@ -1,8 +1,8 @@
 {
   "name": "HouseOps",
   "productName": "HouseOps",
-  "version": "0.0.2",
-  "description": "HouseOps is a Enterprise ClickHouse Database IDE",
+  "version": "0.3.0-beta",
+  "description": "Do science and monitoring your ClickHouse analytical database.",
   "main": "./main.prod.js",
   "author": {
     "name": "Jonatas Freitas",

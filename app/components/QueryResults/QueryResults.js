@@ -181,7 +181,7 @@ export default class QueryResults extends Component<Props> {
           >
             <Tab id="table" title="表格" panel={<Table data={this.props.data} />} />
             <Tab id="jsonObject" title="JSON 对象" panel={<JSONObject data={this.props.data} />} />
-            <Tab id="chartEditor" title="趋势图" panel={<ChartEditor ref="chartEditor" rows={this.state.rows} columnNames={this.state.chart_columns} onUpdate={(nextPlotlyJSON) => this.setState({plotlyJSON: nextPlotlyJSON})} hidden={false} />} />
+            <Tab id="chartEditor" title="图表库" panel={<ChartEditor ref="chartEditor" rows={this.state.rows} columnNames={this.state.chart_columns} onUpdate={(nextPlotlyJSON) => this.setState({plotlyJSON: nextPlotlyJSON})} hidden={false} />} />
 
           </Tabs>
         </div>
